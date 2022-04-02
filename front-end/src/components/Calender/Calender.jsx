@@ -37,8 +37,8 @@ export const Calendar = () => {
     const currentDayClass =
       currentDayString() === dateString ? "current-day" : "";
     daysInMonth.push(
-      <td key={d} id={dateString} className={`calendar-day ${currentDayClass}`}>
-        {d}
+      <td key={d} id={dateString} className="calendar-day">
+        <span className={currentDayClass}>{d}</span>
       </td>
     );
   }
@@ -69,15 +69,40 @@ export const Calendar = () => {
 
   return (
     <section className="calender">
-      <h2>{`${months[date.getMonth()]} ${date.getFullYear()}`}</h2>
-      <table>
-        <thead>
-          <tr>{weekDayHeader}</tr>
-        </thead>
-        <tbody>{monthInRows}</tbody>
-      </table>
-      <button onClick={monthChanger}>Previous</button>
-      <button onClick={monthChanger}>Next</button>
+      <h2 className="calendar__header">{`${
+        months[date.getMonth()]
+      } ${date.getFullYear()}`}</h2>
+      <main className="calender__block">
+        <div
+          name="Previous"
+          onClick={monthChanger}
+          calender__monthchanger
+          className="calender__monthchanger"
+        >
+          <i
+            name="Previous"
+            className="fa-solid fa-angle-left calender__monthchanger-arrow"
+          ></i>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>{weekDayHeader}</tr>
+            </thead>
+            <tbody>{monthInRows}</tbody>
+          </table>
+        </div>
+        <div
+          name="Next"
+          onClick={monthChanger}
+          className="calender__monthchanger"
+        >
+          <i
+            name="Next"
+            className="fa-solid fa-angle-right calender__monthchanger-arrow"
+          ></i>
+        </div>
+      </main>
     </section>
   );
 };

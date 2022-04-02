@@ -7,7 +7,7 @@ export const useCalendar = () => {
   const [date, setDate] = useState(new Date(`${months[month]} ${year}`));
 
   const monthChanger = e => {
-    if (e.target.innerHTML === "Previous") {
+    if (e.target.getAttribute("name") === "Previous") {
       if (month === 0) {
         setMonth(11);
         setYear(prev => prev - 1);
@@ -15,7 +15,7 @@ export const useCalendar = () => {
         setMonth(prev => prev - 1);
       }
     }
-    if (e.target.innerHTML === "Next") {
+    if (e.target.getAttribute("name") === "Next") {
       if (month === 11) {
         setMonth(0);
         setYear(prev => prev - 1);

@@ -1,28 +1,99 @@
+:root{
+  --light-blue-color: #39A2DB;
+  --primary-color: #54BAB9;
+  --secondary-color: #E9DAC1;
+  --tertiary-color: #F7ECDE;
+  --danger-red-color: #fc4f4f;
+  --light-color-bg: #FBF8F1;
+  --light-color-text: #F0F0F0;
+  --dark-color-text: #212121;
+
+  --main-font: 'Yanone Kaffeesatz';
+  --secondary-font: 'Josefin Slab';
+}
+
+/* Nav Component  */
+
+.nav{
+  font-family: var(--main-font);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2em;
+  background-color: var(--light-blue-color);
+}
+.nav h1{
+  margin: 0;
+  padding: .8em 0;
+  color: var(--dark-color-text)
+}
+/* End of Nav Component  */
+
+
+/* Calender Component  */
+.calender{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calendar__header{
+  font-family: var(--secondary-font), serif;
+}
+.calender__block{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .calendar__weekdayheader{
-  color: blue;
+  color: var(--light-color-text);
   width: 6em;
   height: 3em;
-  background: red;
+  background: var(--primary-color);
   border-radius: 5px;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);;
 }
 
 .calendar-day{
-  background-color: green;
+  background-color: var(--tertiary-color);
   text-align: center;
   border-radius: 5px;
   height: 2.5em;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-family: var(--main-font), sans-serif;
   font-size: 1em;
   font-weight: 400;
+  color: var(--dark-color-text);
+  transition: all .2s;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
 }
 .calendar-day:hover{
-  font-weight:bold;
+  transform: translateY(-1px);
+  transition: all .2s;
 }
 
 .empty{
-  background-color: grey;
+  background-color: var(--light-color-text);
 }
 
 .current-day{
-  background-color: purple;
+  color:var(--danger-red-color)
 }
+
+.calender__monthchanger{
+  height: .5em;
+  width: .5em;
+  margin:1em;
+  padding:.6em;
+  background-color: var(--light-color-bg);
+  border-radius: 100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.2);
+}
+.calender__monthchanger:hover{
+  color:var(--primary-color);
+  transition: all .3s;
+}
+.calender__monthchanger:active{
+  color:var(--dark-color-text)
+}
+/* End of Calender Component  */
