@@ -1,0 +1,9 @@
+
+DROP TABLE IF EXISTS tasks CASCADE;
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  date_of_task DATE NOT NULL,
+  is_completed BOOLEAN NOT NULL DEFAULT FALSE
+);

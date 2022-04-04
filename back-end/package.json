@@ -1,0 +1,24 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "API for quota calendar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "db:reset": "node bin/resetdb.js"
+  },
+  "keywords": [],
+  "author": "Andrew Ho",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pg": "^8.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.10"
+  }
+}
