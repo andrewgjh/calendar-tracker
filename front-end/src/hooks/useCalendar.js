@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   months,
   weekDays,
@@ -11,6 +12,7 @@ export const useCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [date, setDate] = useState(new Date(`${months[month]} ${year}`));
+  const [tasks, setTasks] = useState([]);
 
   const monthChanger = e => {
     if (e.target.getAttribute("name") === "Previous") {
@@ -83,6 +85,17 @@ export const useCalendar = () => {
     }
     return null;
   });
+
+  useEffect(() => {
+    const lastday = daysInMonthFn(date);
+    const queryMonth = month + 1;
+    const url = `/api/tasks?startdate=${year}-${queryMonth}-1&enddate=${year}-${queryMonth}-${lastday}`;
+    axios.get(url).then(data => {
+      console.log(data.data);
+      setTasks(data.data);
+    });
+  }, [date]);
+
   return {
     month,
     year,

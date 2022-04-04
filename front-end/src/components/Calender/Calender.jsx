@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCalendar } from "hooks";
-import { months, daysInMonthFn } from "shared";
-import axios from "axios";
+import { months } from "shared";
+// import axios from "axios";
 
 export const Calendar = () => {
   const {
@@ -18,13 +18,6 @@ export const Calendar = () => {
     setDate(new Date(`${months[month]} ${year}`));
   }, [month, year, setDate]);
 
-  useEffect(() => {
-    const lastday = daysInMonthFn(date);
-    const queryMonth = month + 1;
-    const url = `/api/tasks?startdate=${year}-${queryMonth}-1&enddate=${year}-${queryMonth}-${lastday}`;
-    axios.get(url).then(data => console.log(data));
-  }, [date]);
-
   return (
     <section className="calender">
       <h2 className="calendar__header">{`${
@@ -34,7 +27,6 @@ export const Calendar = () => {
         <div
           name="Previous"
           onClick={monthChanger}
-          calender__monthchanger
           className="calender__monthchanger"
         >
           <i

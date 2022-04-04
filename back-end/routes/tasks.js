@@ -4,9 +4,8 @@ const database = require("../database-functions");
 
 module.exports = () => {
   router.get("/", (req, res) => {
-    console.log(req.query);
-    // request will end to include start and end dates
-    database.getAllTasksByMonth("2022-5-1", "2022-5-30").then(data => {
+    const { startdate, enddate } = req.query;
+    database.getAllTasksByMonth(startdate, enddate).then(data => {
       res.json(data);
     });
   });
