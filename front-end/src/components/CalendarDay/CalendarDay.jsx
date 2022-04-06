@@ -4,7 +4,7 @@ export const CalendarDay = props => {
   const completed =
     !dailyTasks?.false && new Date(dateString) < new Date() ? (
       <div className="complete-wrapper">
-        <i class="fa-solid fa-check complete-check"></i>
+        <i className="fa-solid fa-check complete-check"></i>
       </div>
     ) : null;
   return (

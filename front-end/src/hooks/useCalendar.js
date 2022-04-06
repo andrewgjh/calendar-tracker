@@ -13,7 +13,7 @@ import { CalendarDay } from "components/CalendarDay";
 export const useCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
-  const [date, setDate] = useState(new Date(`${months[month]} ${year}`));
+  const [date, setDate] = useState(new Date(year, month));
   const [tasksObj, setTasksObj] = useState({});
 
   const monthChanger = e => {
@@ -59,6 +59,7 @@ export const useCalendar = () => {
     }
     daysInMonth.push(
       <CalendarDay
+        key={d}
         d={d}
         dateString={dateString}
         currentDayClass={currentDayClass}
@@ -80,14 +81,13 @@ export const useCalendar = () => {
 
   totalSlots.forEach((slot, index) => {
     if (index % 7 !== 0) {
-      cells.push(slot); // if index not equal 7 that means not go to next week
+      cells.push(slot);
     } else {
-      rows.push(cells); // when reach next week we contain all td in last week to rows
-      cells = []; // empty container
-      cells.push(slot); // in current loop we still push current row to new container
+      rows.push(cells);
+      cells = [];
+      cells.push(slot);
     }
     if (index === totalSlots.length - 1) {
-      // when end loop we add remain date
       rows.push(cells);
     }
   });

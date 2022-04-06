@@ -11,14 +11,11 @@ export const Calendar = () => {
     monthChanger,
     weekDayHeader,
     monthInRows,
-    tasksObj,
   } = useCalendar();
 
   useEffect(() => {
-    setDate(new Date(`${months[month]} ${year}`));
+    setDate(new Date(year, month));
   }, [month, year, setDate]);
-
-  console.log(tasksObj);
   return (
     <section className="calendar">
       <h2 className="calendar__header">{`${
