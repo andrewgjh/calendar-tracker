@@ -5,7 +5,7 @@ db.connect();
 
 const getAllTasksByMonth = (startdate, enddate) => {
   const queryStatement = `
-  SELECT * FROM tasks 
+  SELECT title, description, is_completed , to_char( task_date, 'YYYY-MM-DD') AS task_date FROM tasks 
   WHERE
   task_date >= $1
   AND task_date <= $2;`;

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCalendar } from "hooks";
 import { months } from "shared";
-// import axios from "axios";
 
 export const Calendar = () => {
   const {
@@ -12,26 +11,28 @@ export const Calendar = () => {
     monthChanger,
     weekDayHeader,
     monthInRows,
+    tasksObj,
   } = useCalendar();
 
   useEffect(() => {
     setDate(new Date(`${months[month]} ${year}`));
   }, [month, year, setDate]);
 
+  console.log(tasksObj);
   return (
-    <section className="calender">
+    <section className="calendar">
       <h2 className="calendar__header">{`${
         months[date.getMonth()]
       } ${date.getFullYear()}`}</h2>
-      <main className="calender__block">
+      <main className="calendar__block">
         <div
           name="Previous"
           onClick={monthChanger}
-          className="calender__monthchanger"
+          className="calendar__monthchanger"
         >
           <i
             name="Previous"
-            className="fa-solid fa-angle-left calender__monthchanger-arrow"
+            className="fa-solid fa-angle-left calendar__monthchanger-arrow"
           ></i>
         </div>
         <div>
@@ -45,11 +46,11 @@ export const Calendar = () => {
         <div
           name="Next"
           onClick={monthChanger}
-          className="calender__monthchanger"
+          className="calendar__monthchanger"
         >
           <i
             name="Next"
-            className="fa-solid fa-angle-right calender__monthchanger-arrow"
+            className="fa-solid fa-angle-right calendar__monthchanger-arrow"
           ></i>
         </div>
       </main>

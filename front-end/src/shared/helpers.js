@@ -22,7 +22,9 @@ export const currentDayString = () => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const day = today.getDate();
-  return `${year}-${month}-${day}`;
+  const monthAddZero = month.toString().length > 1 ? "" : "0";
+  const dateAddZero = day.toString().length > 1 ? "" : "0";
+  return `${year}-${monthAddZero}${month}-${dateAddZero}${day}`;
 };
 
 export const firstDayOfMonth = date => {
@@ -35,4 +37,15 @@ export const daysInMonthFn = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   return new Date(year, month, 0).getDate();
+};
+
+export const groupBy = (objArray, groupByKey) => {
+  return objArray.reduce((acc, obj) => {
+    const key = obj[groupByKey];
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(obj);
+    return acc;
+  }, {});
 };

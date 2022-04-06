@@ -6,13 +6,15 @@ import {
   currentDayString,
   firstDayOfMonth,
   daysInMonthFn,
+  groupBy,
 } from "shared";
+import { CalendarDay } from "components/CalendarDay";
 
 export const useCalendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [date, setDate] = useState(new Date(`${months[month]} ${year}`));
-  const [tasks, setTasks] = useState([]);
+  const [tasksObj, setTasksObj] = useState({});
 
   const monthChanger = e => {
     if (e.target.getAttribute("name") === "Previous") {
@@ -44,13 +46,24 @@ export const useCalendar = () => {
 
   const daysInMonth = [];
   for (let d = 1; d <= daysInMonthFn(date); d++) {
-    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${d}`;
+    const monthAddZero = (date.getMonth() + 1).toString().length > 1 ? "" : "0";
+    const dateAddZero = d.toString().length > 1 ? "" : "0";
+    const dateString = `${date.getFullYear()}-${monthAddZero}${
+      date.getMonth() + 1
+    }-${dateAddZero}${d}`;
+    let dailyTasks = null;
     const currentDayClass =
       currentDayString() === dateString ? "current-day" : "";
+    if (dateString in tasksObj) {
+      dailyTasks = groupBy(tasksObj[dateString], "is_completed");
+    }
     daysInMonth.push(
-      <td key={d} id={dateString} className="calendar-day">
-        <span className={currentDayClass}>{d}</span>
-      </td>
+      <CalendarDay
+        d={d}
+        dateString={dateString}
+        currentDayClass={currentDayClass}
+        dailyTasks={dailyTasks}
+      />
     );
   }
   const weekDayHeader = weekDays.map(weekday => {
@@ -90,9 +103,8 @@ export const useCalendar = () => {
     const lastday = daysInMonthFn(date);
     const queryMonth = month + 1;
     const url = `/api/tasks?startdate=${year}-${queryMonth}-1&enddate=${year}-${queryMonth}-${lastday}`;
-    axios.get(url).then(data => {
-      console.log(data.data);
-      setTasks(data.data);
+    axios.get(url).then(res => {
+      setTasksObj(groupBy(res.data, "task_date"));
     });
   }, [date]);
 
@@ -106,5 +118,6 @@ export const useCalendar = () => {
     emptydays,
     daysInMonth,
     monthInRows,
+    tasksObj,
   };
 };

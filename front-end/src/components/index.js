@@ -1,3 +1,3 @@
 export * from "./App";
-export * from "./Calender";
+export * from "./Calendar";
 export * from "./Navigation";
